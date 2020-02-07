@@ -13,67 +13,65 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.socity.apipleasecustomer.model.Cliente;
-import com.socity.apipleasecustomer.repositoryimpl.ClienteRepositoryImpl;
+import com.socity.apipleasecustomer.service.ClienteService;
 
 @RestController
 public class ClienteController {
 	
 	@Autowired
-	private ClienteRepositoryImpl clienteRepositoryImpl;
-	
+	private ClienteService clienteService;
+
 	@GetMapping("/clientes")
-	public ResponseEntity<List<Cliente>> listarClientes(){
-		List<Cliente> clientes = clienteRepositoryImpl.exibirClientes();
+	public ResponseEntity<List<Cliente>> exibirTodosOsClientes(){
+		List<Cliente> clientes = clienteService.listarTodosClientes();
 		if(clientes.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum cliente cadastrado.");
 		}
-		return ResponseEntity.ok(clientes);
+			return ResponseEntity.ok(clientes);
+		
 	}
 	
 	@GetMapping("/cliente/{idcliente}")
-	public ResponseEntity<Cliente> exibiCliente(@PathVariable Long idcliente){
-		Cliente cliente = clienteRepositoryImpl.exibirCliente(idcliente);
+	public ResponseEntity<Cliente> exibirCliente(@PathVariable Long idcliente){
+		Cliente cliente = clienteService.exibirCliente(idcliente);
 		if(cliente == null) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum cliente com esse id foi cadastrado.");
-		}else {
-			return ResponseEntity.ok(cliente);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum cliente cadastrado.");
 		}
+		return ResponseEntity.ok(cliente);
+		
 	}
 	
 	@PostMapping("/cliente")
-	public ResponseEntity<String> incluirNovoCliente(@RequestBody Cliente cliente){
+	public ResponseEntity<Cliente> incluirNovoCliente(@RequestBody Cliente cliente){
 		if(cliente == null) {
-			throw new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, "Nenhuma informação a ser cadastrada.");
-		}else {
-			clienteRepositoryImpl.salvarCliente(cliente);
-			return ResponseEntity.ok("Cliente inserido com sucesso.");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dados vazios.");
 		}
+		Cliente cli = clienteService.exibirCliente(cliente.getIdcliente());
+		if(cli != null) {
+			throw new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, "Cliente já cadastrado.");
+		}
+		clienteService.salvarCliente(cliente);
+		return ResponseEntity.ok(cliente);
+	}
+	@PutMapping("/cliente")
+	public ResponseEntity<Cliente> atualizarDadosCliente(@PathVariable Long idcliente, @RequestBody Cliente cliente){
+		if (idcliente == null && cliente == null) {
+			throw new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, "Dados do cliente vazio."); 
+		}
+		Cliente ci = clienteService.exibirCliente(cliente.getIdcliente());
+		
+		if (ci == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado.");
+		}
+		BeanUtils.copyProperties(ci, cliente);
+		clienteService.salvarCliente(cliente);
+		
+		return ResponseEntity.ok(cliente);
+		
 	}
 	
-	@PutMapping("/cliente/{idcliente}")
-	public ResponseEntity<String> atualizarCliente(@PathVariable Long idcliente, @RequestBody Cliente cliente){
-		if (idcliente == null || cliente == null) {
-			throw new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, "Nenhuma informação a ser cadastrada.");
-		}else {
-			Cliente cli = clienteRepositoryImpl.exibirCliente(idcliente);
-			if(cli == null) {
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum cliente cadastrado.");
-			}
-			BeanUtils.copyProperties(cliente, cli);
-			clienteRepositoryImpl.atualizarCliente(idcliente, cliente);
-			return ResponseEntity.ok("Cliente atualizado com sucesso.");
-		}
-	}
-//	@DeleteMapping("/cliente/{idcliente}")
-//	public ResponseEntity<String> excluirCliente(@PathVariable Long idcliente){
-//		Cliente cliente = clienteRepositoryImpl.exibirCliente(idcliente);
-//		if(cliente == null) {
-//			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum cliente com esse id foi cadastrado.");
-//		}else {
-//			clienteRepositoryImpl.excluirCliente(idcliente);
-//			return ResponseEntity.ok("Cliente excluído com sucesso");
-//		}
-//	}
+	
 }

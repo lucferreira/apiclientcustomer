@@ -1,22 +1,11 @@
 package com.socity.apipleasecustomer.repository;
 
-import java.util.List;
-
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.socity.apipleasecustomer.model.Endereco;
 
-@Repository
-public interface EnderecoRepository {
+public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
+	
+	public Endereco deletarEnderecoById(Long idendereco);
 
-	public List<Endereco> exibirEnderecos();
-	
-	public Endereco exibirEndereco();
-	
-	public Endereco salvarEndereco(Endereco endereco);
-	
-	public Endereco atualizarEndereco(Long idendereco, Endereco endereco);
-	
-	public void excluirEndereco(Long idendereco);
-	
 }
