@@ -35,9 +35,4 @@ public class BrindeServiceImpl implements BrindeService{
 		return brindeRepository.save(brinde);
 	}
 
-	@Override
-	public Brinde deletarBrinde(Long idbrinde) {
-		return brindeRepository.deletarBrindeById(idbrinde);
-	}
-
 }

@@ -35,9 +35,4 @@ public class LojaServiceImpl implements LojaService{
 		return lojaRepository.save(loja);
 	}
 
-	@Override
-	public Loja deletarCliente(Long idloja) {
-		return lojaRepository.deletarLojaById(idloja);
-	}
-
 }

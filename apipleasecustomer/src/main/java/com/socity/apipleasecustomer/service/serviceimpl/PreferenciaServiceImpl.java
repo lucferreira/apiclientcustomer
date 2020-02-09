@@ -35,9 +35,4 @@ public class PreferenciaServiceImpl implements PreferenciaService{
 		return preferenciaRepository.save(preferencias);
 	}
 
-	@Override
-	public Preferencias deletarPreferencias(Long idpreferencias) {
-		return preferenciaRepository.deletarPreferenciasById(idpreferencias);
-	}
-
 }

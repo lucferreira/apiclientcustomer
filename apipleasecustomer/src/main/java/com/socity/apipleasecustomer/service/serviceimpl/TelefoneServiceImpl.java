@@ -35,9 +35,4 @@ public class TelefoneServiceImpl implements TelefoneService {
 		return telefoneRepository.save(telefone);
 	}
 
-	@Override
-	public Telefone deletarTelefone(Long idtelefone) {
-		return telefoneRepository.deletarTelefoneById(idtelefone);
-	}
-
 }

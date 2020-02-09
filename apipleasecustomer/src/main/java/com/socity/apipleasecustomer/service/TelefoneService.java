@@ -14,6 +14,4 @@ public interface TelefoneService {
 
 	public Telefone atualizarTelefone(Long idtelefone, Telefone telefone);
 
-	public Telefone deletarTelefone(Long idtelefone);
-
 }

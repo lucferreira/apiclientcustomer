@@ -14,6 +14,4 @@ public interface EnderecoService {
 
 	public Endereco atualizarEndereco(Long idendereco, Endereco endereco);
 
-	public Endereco deletarEndereco(Long idendereco);
-
 }

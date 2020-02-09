@@ -14,6 +14,4 @@ public List<Brinde> listarTodosBrindes();
 	
 	public Brinde atualizarBrinde(Long idbrinde, Brinde brinde);
 	
-	public Brinde deletarBrinde(Long idbrinde);
-	
 }

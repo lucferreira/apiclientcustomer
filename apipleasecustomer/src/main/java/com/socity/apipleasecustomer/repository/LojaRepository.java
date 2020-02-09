@@ -6,6 +6,4 @@ import com.socity.apipleasecustomer.model.Loja;
 
 public interface LojaRepository extends JpaRepository<Loja, Long> {
 	
-	public Loja deletarLojaById(Long idloja);
-
 }

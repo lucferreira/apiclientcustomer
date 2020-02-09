@@ -14,6 +14,4 @@ public interface ClienteService {
 	
 	public Cliente atualizarCliente(Long idcliente, Cliente cliente);
 	
-	public Cliente deletarCliente(Long idcliente);
-
 }

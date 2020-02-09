@@ -1,6 +1,6 @@
 package com.socity.apipleasecustomer.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,7 +36,7 @@ public class Cliente {
 	private String sexo;
 	@Getter @Setter
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Date data_nasc;
+	private LocalDate data_nasc;
 	@Getter @Setter
 	private String email;
 

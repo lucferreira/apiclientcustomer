@@ -6,6 +6,4 @@ import com.socity.apipleasecustomer.model.Preferencias;
 
 public interface PreferenciasRepository extends JpaRepository<Preferencias, Long> {
 	
-	public Preferencias deletarPreferenciasById(Long idpreferencias);
-
 }

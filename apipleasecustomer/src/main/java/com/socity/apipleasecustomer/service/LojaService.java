@@ -14,6 +14,4 @@ public interface LojaService {
 
 	public Loja atualizarLoja(Long idloja, Loja loja);
 
-	public Loja deletarCliente(Long idloja);
-
 }

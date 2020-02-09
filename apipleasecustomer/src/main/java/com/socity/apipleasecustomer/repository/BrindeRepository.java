@@ -6,6 +6,4 @@ import com.socity.apipleasecustomer.model.Brinde;
 
 public interface BrindeRepository extends JpaRepository<Brinde, Long> {
 	
-	public Brinde deletarBrindeById(Long idbrinde);
-
 }

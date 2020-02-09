@@ -14,6 +14,4 @@ public interface PreferenciaService {
 
 	public Preferencias atualizarPreferencias(Long idpreferencias, Preferencias preferencias);
 
-	public Preferencias deletarPreferencias(Long idpreferencias);
-
 }
