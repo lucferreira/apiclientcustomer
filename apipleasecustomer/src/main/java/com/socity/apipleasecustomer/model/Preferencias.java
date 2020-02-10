@@ -19,7 +19,7 @@ public class Preferencias {
 	
 	@Getter @Setter
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idpreferencia;
 	@Getter @Setter
 	private String categoria;

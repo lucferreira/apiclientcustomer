@@ -25,7 +25,7 @@ public class Cliente {
 	
 	@Getter @Setter
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idcliente;
 	@Getter @Setter
 	private String nome;

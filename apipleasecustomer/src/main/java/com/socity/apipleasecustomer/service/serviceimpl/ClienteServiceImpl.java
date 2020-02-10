@@ -22,7 +22,7 @@ public class ClienteServiceImpl implements ClienteService{
 
 	@Override
 	public Cliente exibirCliente(Long idcliente) {
-		return clienteRepository.findById(idcliente).get();
+		return clienteRepository.findByIdcliente(idcliente);
 	}
 
 	@Override

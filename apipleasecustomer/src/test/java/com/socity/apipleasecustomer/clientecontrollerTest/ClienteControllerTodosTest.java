@@ -1,10 +1,12 @@
-package com.socity.apipleasecustomer.controllerTest;
+package com.socity.apipleasecustomer.clientecontrollerTest;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
@@ -18,6 +20,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -28,7 +31,7 @@ import com.socity.apipleasecustomer.service.ClienteService;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class ClienteControllerTest {
+public class ClienteControllerTodosTest {
 	
 	@Mock
 	private ClienteService clienteService;
@@ -47,8 +50,14 @@ public class ClienteControllerTest {
 	@Test
 	public void exibirTodosOsClientes() throws Exception {
 		
-		when(clienteService.listarTodosClientes()).thenReturn(clientes());
-		mockMvc.perform(get("/clientes")).andExpect(status().isOk());
+		@SuppressWarnings("unchecked")
+		List<Cliente> mockListCliente = mock(List.class);
+		mockListCliente = this.clientes();
+		
+		when(clienteService.listarTodosClientes()).thenReturn(mockListCliente);
+		
+		mockMvc.perform(get("/cliente/todos")).andExpect(status().isOk())
+		.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
 		
 		verify(clienteService, times(1)).listarTodosClientes();
 	    verifyNoMoreInteractions(clienteService);

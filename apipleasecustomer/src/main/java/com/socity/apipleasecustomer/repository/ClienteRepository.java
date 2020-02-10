@@ -6,5 +6,8 @@ import com.socity.apipleasecustomer.model.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	
+	public Cliente findByIdcliente(Long idcliente);
+	
+	
 	
 }

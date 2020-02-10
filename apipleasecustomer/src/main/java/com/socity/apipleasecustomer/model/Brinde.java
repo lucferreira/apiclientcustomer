@@ -23,7 +23,7 @@ public class Brinde {
 	
 	@Getter @Setter
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idbrinde;
 	@Getter @Setter
 	private String nome;

@@ -21,7 +21,7 @@ public class Telefone {
 	
 	@Getter @Setter
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idtelefone;
 	@Getter @Setter
 	private TipoTelefone tipoTelefone;

@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -18,12 +20,13 @@ import com.socity.apipleasecustomer.model.Cliente;
 import com.socity.apipleasecustomer.service.ClienteService;
 
 @RestController
+@RequestMapping("/cliente")
 public class ClienteController {
 	
 	@Autowired
 	private ClienteService clienteService;
 
-	@GetMapping("/clientes")
+	@GetMapping(path = "/todos", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Cliente>> exibirTodosOsClientes(){
 		List<Cliente> clientes = clienteService.listarTodosClientes();
 		if(clientes.isEmpty()) {
@@ -33,7 +36,7 @@ public class ClienteController {
 		
 	}
 	
-	@GetMapping("/cliente/{idcliente}")
+	@GetMapping(path = "/{idcliente}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Cliente> exibirCliente(@PathVariable Long idcliente){
 		Cliente cliente = clienteService.exibirCliente(idcliente);
 		if(cliente == null) {
@@ -43,12 +46,13 @@ public class ClienteController {
 		
 	}
 	
-	@PostMapping("/cliente")
+	@PostMapping(path = "/novo")
 	public ResponseEntity<Cliente> incluirNovoCliente(@RequestBody Cliente cliente){
 		if(cliente == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dados vazios.");
 		}
-		Cliente cli = clienteService.exibirCliente(cliente.getIdcliente());
+		Long idCliente = cliente.getIdcliente();
+		Cliente cli = clienteService.exibirCliente(idCliente);
 		if(cli != null) {
 			throw new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, "Cliente já cadastrado.");
 		}

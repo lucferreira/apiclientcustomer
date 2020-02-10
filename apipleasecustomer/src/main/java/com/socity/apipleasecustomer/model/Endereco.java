@@ -19,7 +19,7 @@ public class Endereco {
 
 	@Getter @Setter
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idendereco;
 	@Getter @Setter
 	private String logradouro;
