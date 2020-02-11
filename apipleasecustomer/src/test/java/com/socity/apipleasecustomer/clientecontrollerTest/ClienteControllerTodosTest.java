@@ -9,12 +9,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -28,6 +28,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.socity.apipleasecustomer.controller.ClienteController;
 import com.socity.apipleasecustomer.model.Cliente;
 import com.socity.apipleasecustomer.service.ClienteService;
+import com.socity.apipleasecustomer.util.Sexo;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -47,6 +48,7 @@ public class ClienteControllerTodosTest {
 		mockMvc = MockMvcBuilders.standaloneSetup(clienteController).build();
 		
 	}
+	
 	@Test
 	public void exibirTodosOsClientes() throws Exception {
 		
@@ -65,10 +67,11 @@ public class ClienteControllerTodosTest {
 	}
 	
 	public List<Cliente> clientes(){
+		Date data = new Date();
 		List<Cliente> clientes = new ArrayList<>();
-		Cliente cl1 = new Cliente(1L,"Márcio Levi Souza","930.021.057-24","MASCULINO",LocalDate.now(),"mmariosouza@mnproducoes.com");
-		Cliente cl2 = new Cliente(1L,"Roberto Levi Souza","930.021.057-24","MASCULINO",LocalDate.now(),"mmariosouza@mnproducoes.com");
-		Cliente cl3 = new Cliente(1L,"Carlos Levi Souza","930.021.057-24","MASCULINO",LocalDate.now(),"mmariosouza@mnproducoes.com");
+		Cliente cl1 = new Cliente(1L,"Márcio Levi Souza","930.021.057-24",Sexo.MASCULINO,data,"mmariosouza@mnproducoes.com");
+		Cliente cl2 = new Cliente(1L,"Roberto Levi Souza","930.021.057-24",Sexo.MASCULINO,data,"mmariosouza@mnproducoes.com");
+		Cliente cl3 = new Cliente(1L,"Carlos Levi Souza","930.021.057-24",Sexo.MASCULINO,data,"mmariosouza@mnproducoes.com");
 		clientes.add(cl1);
 		clientes.add(cl2);
 		clientes.add(cl3);

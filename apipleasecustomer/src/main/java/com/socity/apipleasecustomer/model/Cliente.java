@@ -1,6 +1,6 @@
 package com.socity.apipleasecustomer.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.socity.apipleasecustomer.util.Sexo;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -33,10 +33,10 @@ public class Cliente {
 	@CPF
 	private String cpf;
 	@Getter @Setter
-	private String sexo;
+	private Sexo sexo;
 	@Getter @Setter
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private LocalDate data_nasc;
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date data_nasc;
 	@Getter @Setter
 	private String email;
 

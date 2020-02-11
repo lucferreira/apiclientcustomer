@@ -1,4 +1,4 @@
-package com.socity.apipleasecustomer.clientecontrollerTest;
+package com.socity.apipleasecustomer.lojacontrollerTest;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -7,7 +7,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,46 +22,48 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.socity.apipleasecustomer.controller.ClienteController;
-import com.socity.apipleasecustomer.model.Cliente;
-import com.socity.apipleasecustomer.service.ClienteService;
+import com.socity.apipleasecustomer.controller.LojaController;
+import com.socity.apipleasecustomer.model.Loja;
+import com.socity.apipleasecustomer.service.LojaService;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class ClienteControllerNovoClienteTest {
+public class LojaControllerNovoTest {
+	
 	
 	@Mock
-	private ClienteService clienteService;
+	private LojaService lojaService;
 	
 	@InjectMocks
-	private ClienteController clienteController;
+	private LojaController lojaController;
 	
 	private MockMvc mockMvc;
 	
 	@Before
 	public void init() {
 		MockitoAnnotations.initMocks(this);
-		mockMvc = MockMvcBuilders.standaloneSetup(clienteController).build();
+		mockMvc = MockMvcBuilders.standaloneSetup(lojaController).build();
 	}
-	
 	@Test
-	public void inserirNovoClienteTest() throws Exception {
-		Cliente mockCliente = mock(Cliente.class);
-		mockCliente = cliente();
+	public void incluirNovaLojaTest() throws Exception {
+		Loja lojaMockFalse = mock(Loja.class);
+		lojaMockFalse = loja();
 		
-		when(clienteService.salvarCliente(mockCliente)).thenReturn(mockCliente);
-		mockMvc.perform(post("/cliente/novo")
-		.contentType(MediaType.APPLICATION_JSON))
-//		.content(asJsonString(mockCliente)))
-		.andExpect(status().isOk());
+		when(lojaService.salvarLoja(lojaMockFalse)).thenReturn(lojaMockFalse);
+		mockMvc.perform(post("/loja/novo")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(asJsonString(lojaMockFalse)))
+				.andExpect(status().isOk());
 		
-		verify(clienteService, times(1)).salvarCliente(mockCliente);
+		verify(lojaService, times(1)).salvarLoja(lojaMockFalse);
 		
 	}
-	
-	public Cliente cliente () {
-		Cliente cl = new Cliente(5L,"Márcio Levi Souza","930.021.057-24","MASCULINO",LocalDate.now(),"mmariosouza@mnproducoes.com");
-		return cl;
+
+	public Loja loja() {
+		//LocalDate localDate = LocalDate.now();
+		Date data = new Date();
+		Loja loja = new Loja(1L, "SUPORTE PLÁSTICO LTDA", "47583873000138", "66102483", "OBJETO", data);
+		return loja;
 	}
 	
 	public static String asJsonString(final Object obj) {
@@ -71,5 +73,5 @@ public class ClienteControllerNovoClienteTest {
             throw new RuntimeException(e);
         }
     }
-
+	
 }

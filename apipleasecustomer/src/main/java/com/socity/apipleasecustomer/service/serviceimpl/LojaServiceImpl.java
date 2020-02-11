@@ -22,7 +22,7 @@ public class LojaServiceImpl implements LojaService{
 
 	@Override
 	public Loja exibirLoja(Long idloja) {
-		return lojaRepository.findById(idloja).get();
+		return lojaRepository.findByIdloja(idloja);
 	}
 
 	@Override
