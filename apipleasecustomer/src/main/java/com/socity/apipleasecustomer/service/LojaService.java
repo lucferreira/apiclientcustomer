@@ -12,6 +12,6 @@ public interface LojaService {
 
 	public Loja salvarLoja(Loja loja);
 
-	public Loja atualizarLoja(Long idloja, Loja loja);
+	public Loja atualizarLoja(Loja loja);
 
 }

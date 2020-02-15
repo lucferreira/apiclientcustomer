@@ -12,6 +12,6 @@ public interface ClienteService {
 	
 	public Cliente salvarCliente(Cliente cliente);
 	
-	public Cliente atualizarCliente(Long idcliente, Cliente cliente);
+	public Cliente atualizarCliente(Cliente cliente);
 	
 }

@@ -60,16 +60,13 @@ public class ClienteController {
 	}
 	@PutMapping(path = "/altercliente/{idcliente}", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Cliente> atualizarDadosCliente(@PathVariable Long idcliente, @RequestBody Cliente cliente){
-		if (idcliente == null && cliente == null) {
-			throw new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, "Dados do cliente vazio."); 
-		}
 		Cliente ci = clienteService.exibirCliente(cliente.getIdcliente());
 		
 		if (ci == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado.");
 		}
 		BeanUtils.copyProperties(ci, cliente);
-		clienteService.salvarCliente(cliente);
+		clienteService.atualizarCliente(cliente);
 		
 		return ResponseEntity.ok(cliente);
 		

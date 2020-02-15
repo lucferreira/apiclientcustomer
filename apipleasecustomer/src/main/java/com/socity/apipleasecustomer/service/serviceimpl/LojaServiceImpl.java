@@ -31,7 +31,7 @@ public class LojaServiceImpl implements LojaService{
 	}
 
 	@Override
-	public Loja atualizarLoja(Long idloja, Loja loja) {
+	public Loja atualizarLoja(Loja loja) {
 		return lojaRepository.save(loja);
 	}
 
